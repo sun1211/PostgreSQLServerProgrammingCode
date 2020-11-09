@@ -1,0 +1,6 @@
+CREATE OR REPLACE FUNCTION remove_duplicates(anyarray)
+RETURNS anyarray AS
+$$
+	SELECT ARRAY(SELECT DISTINCT unnest($1));
+$$
+LANGUAGE 'sql' ;

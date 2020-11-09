@@ -1,0 +1,16 @@
+    CREATE OR REPLACE FUNCTION list_folder(
+    directory VARCHAR -- directory that will be walked
+    ) RETURNS  SETOF VARCHAR
+    AS $$
+    import os;
+    file_paths = [];
+
+    # Walk the tree.
+    for root, directories, files in os.walk(directory):
+        for filename in files:
+            # Join the two strings in order to form the full filepath.
+            filepath = os.path.join(root, filename)
+            file_paths.append(filepath)  # Add it to the list.
+
+    return file_paths 
+    $$ LANGUAGE plpythonu;

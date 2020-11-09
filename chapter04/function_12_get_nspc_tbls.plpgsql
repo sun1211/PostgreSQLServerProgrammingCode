@@ -1,0 +1,1 @@
+CREATE OR REPLACE FUNCTION get_nspc_tbls(VARIADIC arr name[])RETURNS TABLE(table_name name,id oid,nspname name)AS $$BEGIN RETURN QUERY SELECT c.relname , c.oid , n.nspname from pg_class c, 			pg_namespace n where c.relnamespace = n.oid and n.nspname = any(arr);END;$$ LANGUAGE plpgsql;
